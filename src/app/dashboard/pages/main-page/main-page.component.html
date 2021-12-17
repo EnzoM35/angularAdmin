@@ -1,0 +1,87 @@
+<div class="container">
+  <mat-toolbar>
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+      <mat-icon *ngIf="!sidenav.opened">
+        menu
+      </mat-icon>
+      <mat-icon *ngIf="sidenav.opened">
+        close
+      </mat-icon>
+    </button>
+    TODO IT
+  </mat-toolbar>
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z4">
+      <img src="../../../../assets/userLogo.png" alt="" width="80%" height="25%">
+      <h4 class="name">Enzo Miranda</h4>
+      <p class="designation">Administrador</p>
+      <mat-divider></mat-divider>
+      <button mat-button class="menu-button" (click)="registro()">
+        <mat-icon>how_to_reg</mat-icon>
+        <span>Registro</span>
+      </button>
+      <button mat-button class="menu-button" (click)="viajes()">
+        <mat-icon>airplanemode_active</mat-icon>
+        <span>Viajes</span>
+      </button>
+      <button mat-button class="menu-button" (click)="historial()">
+        <mat-icon>history</mat-icon>
+        <span>Historial viajes</span>
+      </button>
+      <button mat-button class="menu-button" (click)="listas()">
+        <mat-icon>list</mat-icon>
+        <span>Listas</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-button class="menu-button">
+        <mat-icon>close</mat-icon>
+        <span>Cerrar sesión</span>
+      </button>
+    </mat-sidenav>
+    <mat-sidenav-content style="overflow: hidden;">
+      <div class="content ">
+        <!--REGISTRO-->
+        <div class="register" *ngIf="register">
+          registro
+        </div>
+
+        <!--VIAJES-->
+        <div class="selectTravel" *ngIf="travels">
+          <mat-form-field appearance="standard">
+            <mat-label>Selecciona una opción</mat-label>
+            <mat-select [(value)]="selected" (click)="capturar()">
+
+              <mat-option value="viajesActivos" (click)="viajes()">
+                Viajes activos
+              </mat-option>
+
+              <mat-option value="viajesPendientes">
+                Viajes pendientes
+              </mat-option>
+              <mat-option value="viajesEnCurso">
+                Viajes en curso
+              </mat-option>
+
+            </mat-select>
+          </mat-form-field>
+          <app-table-active *ngIf="selected === 'viajesActivos'"></app-table-active>
+          <app-table-pending *ngIf="selected === 'viajesPendientes'"></app-table-pending>
+          <app-table-course *ngIf="selected === 'viajesEnCurso'"></app-table-course>
+        </div>
+
+        <!--HISTORIAL-->
+        <div class="history" *ngIf="history">
+          <app-table-history></app-table-history>
+        </div>
+
+        <!--LISTAS-->
+        <div class="list" *ngIf="list">
+          listas
+        </div>
+
+
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+</div>

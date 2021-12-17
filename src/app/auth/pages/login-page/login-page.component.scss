@@ -1,0 +1,73 @@
+.title {
+  //font facherita
+  font-size: 35px;
+  font-weight: bold;
+  margin: 0;
+  color: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.info {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: white;
+  max-width: 450px;
+  margin: 0 auto;
+  padding-bottom: 10px;
+}
+
+.loginMain {
+  text-align: center;
+}
+
+.imagen {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 950px) {
+  .title {
+    font-size: 60px;
+    line-height: 1.5;
+    padding-top: 1em;
+  }
+
+  .info {
+    font-size: 25px;
+    margin: 30px 0;
+  }
+
+  .login {
+    text-align: center;
+    padding: 2em;
+  }
+}
+
+@media (min-width: 950px) {
+  .loginMain {
+    text-align: left;
+    display: flex;
+    max-width: 980px;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+
+  app-login {
+    font-size: 18px;
+    padding: 3em 0;
+  }
+
+  .imagen {
+    img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+}

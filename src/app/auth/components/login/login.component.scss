@@ -1,0 +1,49 @@
+.formRequest {
+  width: 100%;
+}
+mat-card {
+  width: 80%;
+  height: 22em;
+  margin-left: 1.5em;
+
+  mat-card-title {
+    margin: 0 auto;
+    padding: 0.5em 0;
+  }
+}
+
+.buttonRequest {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  padding: 0 6em;
+}
+
+.linkRegister {
+  display: flex;
+  justify-content: center;
+  padding: 1.2em 0;
+}
+
+mat-form-field {
+  width: 100%;
+  padding: 0.5em 0;
+}
+
+@media (min-width: 950px) {
+  mat-form-field {
+    width: 300px;
+  }
+  mat-card {
+    width: 18em;
+    height: 20em;
+  }
+}
+
+@media (max-width: 375px) {
+  mat-card-title {
+    font-size: 16px;
+  }
+}

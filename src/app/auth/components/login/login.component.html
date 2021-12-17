@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-title>Iniciar sesión</mat-card-title>
+  <form #form="ngForm" [formGroup]="loginForm" (ngSubmit)="submit(formDirective)" id="formR" #formDirective=ngForm>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="pat@example.com" formControlName="email" required>
+      <mat-icon matSuffix>email</mat-icon>
+      <mat-error></mat-error>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Contraseña</mat-label>
+      <input matInput placeholder="escriba su contraseña" formControlName="password" type="password" required>
+      <mat-icon matSuffix>key</mat-icon>
+
+    </mat-form-field>
+    <br>
+    <br>
+
+    <div class="buttonRequest">
+      <button mat-raised-button type="submit" color="primary">LOGIN</button>
+    </div>
+  </form>
+</mat-card>
