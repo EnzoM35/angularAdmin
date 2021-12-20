@@ -5,6 +5,7 @@ import { delay } from 'rxjs/operators';
 import { Viaje } from '../../model/viaje';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-page',
@@ -16,17 +17,21 @@ export class MainPageComponent implements OnInit {
   sidenav!: MatSidenav;
   selected: string = ''; // Iniciamos
   verSelected: string = '';
+  nameAdmin: string = '';
   register: boolean = false;
   travels: boolean = false;
   history: boolean = false;
   list: boolean = false;
 
-
   capturar() {
     this.verSelected = this.selected;
   }
 
-  constructor(private observer: BreakpointObserver, private http: HttpClient) {}
+  constructor(
+    private observer: BreakpointObserver,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   ngAfterViewInit() {
     this.observer
@@ -43,7 +48,10 @@ export class MainPageComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.register = true;
+    this.nameAdmin = JSON.parse(localStorage.getItem('name')!);
+  }
 
   registro(): void {
     this.list = false;
@@ -60,6 +68,7 @@ export class MainPageComponent implements OnInit {
     this.travels = true;
   }
   listas(): void {
+    this.selected = 'todos';
     this.register = false;
     this.history = false;
     this.travels = false;
@@ -70,5 +79,14 @@ export class MainPageComponent implements OnInit {
     this.register = false;
     this.travels = false;
     this.history = true;
+  }
+
+  clearStorage() {
+    localStorage.clear();
+    this.isLoginRoute();
+  }
+
+  isLoginRoute() {
+    return this.router.navigate(['auth/login']);
   }
 }

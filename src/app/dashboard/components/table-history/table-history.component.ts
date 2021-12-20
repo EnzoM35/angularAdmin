@@ -23,7 +23,7 @@ export class TableHistoryComponent implements OnInit {
     this.setDataSourceAttributes();
   }
 
-  displayedColumns: string[] = ['cadete'];
+  displayedColumns: string[] = ['cadete', 'cliente', 'fecha', 'estado'];
 
   dataSource: MatTableDataSource<Viaje>;
 
@@ -44,11 +44,11 @@ export class TableHistoryComponent implements OnInit {
       this.viajesActivos.sort(function (a, b) {
         return (
           Date.parse(
-            a.travelEquipmentDTOs[a.travelEquipmentDTOs.length - 1]
+            b.travelEquipmentDTOs[b.travelEquipmentDTOs.length - 1]
               .operationDate
           ) -
           Date.parse(
-            b.travelEquipmentDTOs[b.travelEquipmentDTOs.length - 1]
+            a.travelEquipmentDTOs[a.travelEquipmentDTOs.length - 1]
               .operationDate
           )
         );
@@ -57,7 +57,6 @@ export class TableHistoryComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Viaje>(this.viajesActivos);
       this.dataSource.paginator = this.paginator;
       this.loading = true;
-      console.log(this.viajesActivos);
     });
   }
 

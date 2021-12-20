@@ -5,7 +5,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Viaje } from '../../model/viaje';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
-
+import { modificarViaje } from '../../model/modificarViaje';
+import { serviceChange } from '../../services/serviceChange';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-table-active',
   templateUrl: './table-active.component.html',
@@ -25,13 +27,26 @@ export class TableActiveComponent implements OnInit {
   @ViewChild(MatSort) sort: any;
 
   displayedColumns: string[] = ['cliente', 'direccion', 'estado'];
-
+  arrayEstados: string[] = [
+    'Solicitud de retiro cliente',
+    'Asignado al cadete para lab.',
+    'En viaje al laboratorio',
+    'Pendiente de reparación',
+    'Reparado',
+    'Asignado al cadete para cliente.',
+    'En viaje al cliente',
+    'Entregado al cliente',
+    'Entregado conforme',
+  ];
   dataSource: MatTableDataSource<Viaje>;
-
   viajesActivos: Viaje[];
   loading: boolean = false;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private snackBar: MatSnackBar,
+    private http: HttpClient,
+    private servicechange: serviceChange
+  ) {
     this.viajesDisponibles();
   }
 
@@ -80,6 +95,7 @@ export class TableActiveComponent implements OnInit {
         );
       });
       console.clear();
+
       this.dataSource = new MatTableDataSource<Viaje>(this.viajesActivos);
       this.dataSource.paginator = this.paginator;
       this.loading = true;
@@ -88,11 +104,11 @@ export class TableActiveComponent implements OnInit {
 
   estadoMap: any = {
     '1': 'Solicitud de retiro cliente',
-    '2': 'Asignado al cadete',
+    '2': 'Asignado al cadete para lab.',
     '3': 'En viaje al laboratorio',
     '4': 'Pendiente de reparación',
     '5': 'Reparado',
-    '6': 'Asignado al cadete',
+    '6': 'Asignado al cadete para cliente.',
     '7': 'En viaje al cliente',
     '8': 'Entregado al cliente',
     other: '-',
@@ -105,6 +121,40 @@ export class TableActiveComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  //CAMBIAR ESTADO DEL VIAJE
+
+  change(item: Viaje) {
+    let status: number = item.lastStatusTravel;
+    let userO: number = 1;
+    let idCadete: number = 53;
+    console.log(item);
+    let asignar: modificarViaje = {
+      travelID: item.id,
+      statusTravel: status,
+      userOperation: userO,
+      cadeteID: idCadete,
+      isReasigned: true,
+    };
+
+    this.servicechange.changeStatus(asignar).subscribe(
+      (resp) => {
+        this.snackBar.open('Estado reasignado con éxito!', '', {
+          duration: 4000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+        this.viajesDisponibles();
+      },
+      (error) => {
+        this.snackBar.open('Error 404', '', {
+          duration: 4000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      }
+    );
   }
 
   ngOnInit(): void {}

@@ -8,12 +8,13 @@
         close
       </mat-icon>
     </button>
-    TODO IT
+    <div class="logo">TODO IT</div>
+    <div class="imagen"><img src="../../../../assets/loginHome.png" alt="" width="60px" height="60px"></div>
   </mat-toolbar>
   <mat-sidenav-container>
     <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z4">
       <img src="../../../../assets/userLogo.png" alt="" width="80%" height="25%">
-      <h4 class="name">Enzo Miranda</h4>
+      <h4 class="name">{{nameAdmin}}</h4>
       <p class="designation">Administrador</p>
       <mat-divider></mat-divider>
       <button mat-button class="menu-button" (click)="registro()">
@@ -33,7 +34,7 @@
         <span>Listas</span>
       </button>
       <mat-divider></mat-divider>
-      <button mat-button class="menu-button">
+      <button mat-button class="menu-button" (click)="clearStorage()" routerLink="/auth/login">
         <mat-icon>close</mat-icon>
         <span>Cerrar sesión</span>
       </button>
@@ -42,7 +43,7 @@
       <div class="content ">
         <!--REGISTRO-->
         <div class="register" *ngIf="register">
-          registro
+          <app-form-register></app-form-register>
         </div>
 
         <!--VIAJES-->
@@ -71,12 +72,39 @@
 
         <!--HISTORIAL-->
         <div class="history" *ngIf="history">
+          <h1 class="title">HISTORIAL</h1>
           <app-table-history></app-table-history>
         </div>
 
         <!--LISTAS-->
-        <div class="list" *ngIf="list">
-          listas
+        <div class="selectTravel" *ngIf="list">
+
+          <mat-form-field appearance="standard">
+            <mat-label>Selecciona una opción</mat-label>
+            <mat-select [(value)]="selected" (click)="capturar()">
+
+              <mat-option value="admin">
+                Administradores
+              </mat-option>
+
+              <mat-option value="clients">
+                Clientes
+              </mat-option>
+              <mat-option value="cadet">
+                Cadetes
+              </mat-option>
+              <mat-option value="todos">
+                Todos los usuarios
+              </mat-option>
+
+            </mat-select>
+          </mat-form-field>
+          <app-table-list-admins *ngIf="selected === 'admin'"></app-table-list-admins>
+          <app-table-list-cadets *ngIf="selected === 'cadet'"></app-table-list-cadets>
+          <app-table-list-users *ngIf="selected === 'clients'"></app-table-list-users>
+          <app-table-list-all *ngIf="selected === 'todos'"></app-table-list-all>
+
+
         </div>
 
 

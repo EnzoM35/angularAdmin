@@ -1,6 +1,24 @@
 table {
   width: 100%;
 }
+.allTable {
+  margin-left: 10%;
+}
+.mat-column-estado {
+  word-wrap: break-Word !important;
+  white-space: unset !important;
+  flex: 0 0 28% !important;
+  width: 28% !important;
+  overflow-wrap: break-Word;
+  word-wrap: break-Word;
+
+  word-break: break-Word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
 
 mat-paginator {
   background-color: #1e1854;

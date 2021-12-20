@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './auth/pages/login-page/login-page.component';
+import { AuthGuardGuard } from './shared/loginGuard/login.guard';
+import { AuthLoginOKGuard } from './shared/loginOKGuard/logged.guard';
 
 const routes: Routes = [
   {
@@ -10,6 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'auth',
+
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {

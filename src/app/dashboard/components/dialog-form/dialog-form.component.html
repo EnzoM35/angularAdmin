@@ -1,0 +1,60 @@
+<div class="contentDialog">
+  <form #form="ngForm" [formGroup]="reqForm" (ngSubmit)="submit(formDirective)" id="formR" #formDirective=ngForm>
+    <mat-card-title>Modificar usuario</mat-card-title>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Rol de usuario</mat-label>
+      <mat-select required autocomplete="off" formControlName="rol" #rol>
+        <mat-option *ngFor="let item of arrayRoles" [value]="item" (click)="isCadete(item.name!)">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre completo</mat-label>
+      <input matInput type="input" formControlName="fullName" [(ngModel)]="nombre" required>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" [(ngModel)]="mail" required>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Contraseña</mat-label>
+      <input matInput formControlName="password" [(ngModel)]="password" required>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Dirección</mat-label>
+      <input matInput type="input" formControlName="address" [(ngModel)]="direccion" required>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Teléfono</mat-label>
+      <input matInput type="input" formControlName="cellPhone" [(ngModel)]="telefono" required>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill" *ngIf="cadete">
+      <mat-label>Vehiculo</mat-label>
+      <mat-select autocomplete="off" formControlName="vehicle">
+        <mat-option *ngFor="let item of arrayVeh" [value]="item">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <div class="buttonRequest">
+      <button mat-raised-button type="submit" color="primary" [disabled]="!reqForm.valid">Modificar</button>
+      <button mat-raised-button type="button" style="background-color: red; color: white;"
+        (click)="onNoClick()">Cancelar</button>
+    </div>
+
+  </form>
+</div>
