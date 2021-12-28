@@ -70,11 +70,15 @@
         <ng-container matColumnDef="elimMod">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Eliminar/Modificar</th>
           <td mat-cell *matCellDef="let row" [ngStyle]="{'background-color': row.isDeleted ? '#4b4988' : ''}">
-            <div class="eliMod" *ngIf="row.rol?.id != 1"><button mat-icon-button>
-                <mat-icon [ngStyle]="{'color':'white'}" (click)="show(row)">assignment</mat-icon>
-              </button><button mat-icon-button>
-                <mat-icon [ngStyle]="{'color':'white'}" (click)="deleteUser(row)">close</mat-icon>
-              </button></div>
+            <div class="eliMod" *ngIf="row.rol?.id != 1">
+              <div *ngIf="row.isDeleted != true">
+                <button mat-icon-button>
+                  <mat-icon [ngStyle]="{'color':'white'}" (click)="show(row)">assignment</mat-icon>
+                </button><button mat-icon-button>
+                  <mat-icon [ngStyle]="{'color':'white'}" (click)="deleteUser(row)">close</mat-icon>
+                </button>
+              </div>
+            </div>
           </td>
         </ng-container>
 

@@ -5,7 +5,6 @@ mat-card {
   width: 80%;
   height: 22em;
   margin-left: 1.5em;
-
   mat-card-title {
     margin: 0 auto;
     padding: 0.5em 0;
@@ -34,11 +33,11 @@ mat-form-field {
 
 @media (min-width: 950px) {
   mat-form-field {
-    width: 300px;
+    width: 100%;
   }
   mat-card {
     width: 18em;
-    height: 20em;
+    height: 18em;
   }
 }
 

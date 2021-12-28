@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class MainPageComponent implements OnInit {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
-  selected: string = ''; // Iniciamos
+  selected: string = '';
   verSelected: string = '';
   nameAdmin: string = '';
   register: boolean = false;
