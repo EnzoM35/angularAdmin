@@ -1,3 +1,7 @@
+## Acceso de prueba
+User: administrador@gmail.com
+Pass: 123456
+
 # TiLogisticsHubUserAdmin
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.1.
